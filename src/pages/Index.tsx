@@ -1,10 +1,17 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import SpinningCharacter from '@/components/SpinningCharacter';
 import FloatingElements from '@/components/FloatingElements';
 import InteractiveButtons from '@/components/InteractiveButtons';
+import AudioManager from '@/components/AudioManager';
 
 const Index = () => {
+  const [playSound, setPlaySound] = useState<((type: string) => void) | null>(null);
+
+  const handleAudioReady = (playSoundFn: (type: string) => void) => {
+    setPlaySound(() => playSoundFn);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-pink-300 via-purple-300 to-indigo-400 overflow-hidden relative">
       {/* Background pattern */}
@@ -18,6 +25,9 @@ const Index = () => {
       {/* Floating background elements */}
       <FloatingElements />
       
+      {/* Audio Manager */}
+      <AudioManager onAudioReady={handleAudioReady} />
+      
       {/* Main content */}
       <div className="relative z-10 flex flex-col items-center justify-center min-h-screen p-4">
         <div className="text-center mb-8">
@@ -30,10 +40,10 @@ const Index = () => {
         </div>
         
         {/* Main spinning character */}
-        <SpinningCharacter />
+        <SpinningCharacter playSound={playSound} />
         
         {/* Interactive buttons */}
-        <InteractiveButtons />
+        <InteractiveButtons playSound={playSound} />
         
         {/* Fun stats */}
         <div className="mt-8 text-center text-white/70">

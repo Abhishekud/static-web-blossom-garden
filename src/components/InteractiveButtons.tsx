@@ -2,7 +2,11 @@
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 
-const InteractiveButtons = () => {
+interface InteractiveButtonsProps {
+  playSound?: ((type: string) => void) | null;
+}
+
+const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) => {
   const [mood, setMood] = useState('happy');
   
   const moods = [
@@ -14,6 +18,7 @@ const InteractiveButtons = () => {
 
   const handleMoodChange = (newMood: string) => {
     setMood(newMood);
+    playSound?.('mood');
     const selectedMood = moods.find(m => m.name === newMood);
     toast(`Feeling ${newMood}! ${selectedMood?.emoji}`, {
       description: "Kuru kuru is now in a " + newMood + " mood!",
@@ -21,6 +26,7 @@ const InteractiveButtons = () => {
   };
 
   const handleSpecialAction = () => {
+    playSound?.('magic');
     toast("✨ KURU KURU MAGIC! ✨", {
       description: "Something magical just happened!",
     });
@@ -29,6 +35,11 @@ const InteractiveButtons = () => {
     setTimeout(() => {
       document.body.style.filter = 'none';
     }, 1000);
+  };
+
+  const handleAction = (action: string, message: string, description: string) => {
+    playSound?.('click');
+    toast(message, { description });
   };
 
   return (
@@ -62,19 +73,19 @@ const InteractiveButtons = () => {
         
         <div className="flex justify-center gap-4">
           <button
-            onClick={() => toast("🎵 Kuru kuru is dancing!", { description: "Music in the air!" })}
+            onClick={() => handleAction('dance', "🎵 Kuru kuru is dancing!", "Music in the air!")}
             className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
           >
             🎵 Dance
           </button>
           <button
-            onClick={() => toast("💤 Kuru kuru is sleepy...", { description: "Time for a nap!" })}
+            onClick={() => handleAction('sleep', "💤 Kuru kuru is sleepy...", "Time for a nap!")}
             className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
           >
             💤 Sleep
           </button>
           <button
-            onClick={() => toast("🍭 Yummy treat!", { description: "Kuru kuru loves sweets!" })}
+            onClick={() => handleAction('treat', "🍭 Yummy treat!", "Kuru kuru loves sweets!")}
             className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
           >
             🍭 Treat

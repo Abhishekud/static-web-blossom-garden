@@ -1,16 +1,28 @@
 
 import React, { useState, useEffect } from 'react';
 
-const SpinningCharacter = () => {
+interface SpinningCharacterProps {
+  playSound?: ((type: string) => void) | null;
+}
+
+const SpinningCharacter: React.FC<SpinningCharacterProps> = ({ playSound }) => {
   const [isSpinning, setIsSpinning] = useState(true);
   const [spinSpeed, setSpinSpeed] = useState(2);
   const [clicks, setClicks] = useState(0);
 
   const handleClick = () => {
     setClicks(prev => prev + 1);
+    playSound?.('click');
+    
     // Increase spin speed temporarily
     setSpinSpeed(8);
     setTimeout(() => setSpinSpeed(2), 1000);
+  };
+
+  const handleSpinToggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsSpinning(!isSpinning);
+    playSound?.('spin');
   };
 
   return (
@@ -58,10 +70,7 @@ const SpinningCharacter = () => {
       {/* Spin control */}
       <div className="absolute -bottom-16 left-1/2 transform -translate-x-1/2">
         <button
-          onClick={(e) => {
-            e.stopPropagation();
-            setIsSpinning(!isSpinning);
-          }}
+          onClick={handleSpinToggle}
           className="px-4 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
         >
           {isSpinning ? '⏸️ Pause' : '▶️ Spin'}

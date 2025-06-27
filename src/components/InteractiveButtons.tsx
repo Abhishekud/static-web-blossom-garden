@@ -37,13 +37,8 @@ const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) =>
     setTimeout(() => {
       document.body.style.filter = 'none';
     }, 1000);
-  };
-
-  const handleAction = (action: string, message: string, description: string) => {
-    playSound?.('click');
-    toast(message, { description, duration: 3000 });
-  };
-
+  }; 
+  
   return (
     <div className="mt-12 space-y-6">
       {/* Mood selector */}
@@ -72,27 +67,6 @@ const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) =>
         >
           🎭 Magic Button
         </button>
-        
-        <div className="flex justify-center gap-4">
-          <button
-            onClick={() => handleAction('dance', "🎵 Kuru kuru is dancing!", "Music in the air!")}
-            className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
-          >
-            🎵 Dance
-          </button>
-          <button
-            onClick={() => handleAction('sleep', "💤 Kuru kuru is sleepy...", "Time for a nap!")}
-            className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
-          >
-            💤 Sleep
-          </button>
-          <button
-            onClick={() => handleAction('treat', "🍭 Yummy treat!", "Kuru kuru loves sweets!")}
-            className="px-6 py-2 bg-white/20 backdrop-blur-sm text-white rounded-full hover:bg-white/30 transition-all"
-          >
-            🍭 Treat
-          </button>
-        </div>
       </div>
     </div>
   );

@@ -63,12 +63,14 @@ const AudioManager: React.FC<AudioManagerProps> = ({ onAudioReady }) => {
       setIsEnabled(true);
       onAudioReady(playSound);
       toast("🔊 Audio enabled! Enjoy the sounds!", {
-        description: "Kuru kuru sounds are now active!"
+        description: "Kuru kuru sounds are now active!",
+        duration: 3000  
       });
     } catch (error) {
       console.error('Failed to enable audio:', error);
       toast("❌ Audio failed to enable", {
-        description: "Your browser might not support audio features"
+        description: "Your browser might not support audio features",
+        duration: 3000  
       });
     }
   };

@@ -22,6 +22,7 @@ const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) =>
     const selectedMood = moods.find(m => m.name === newMood);
     toast(`Feeling ${newMood}! ${selectedMood?.emoji}`, {
       description: "Kuru kuru is now in a " + newMood + " mood!",
+      duration: 3000  
     });
   };
 
@@ -29,6 +30,7 @@ const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) =>
     playSound?.('magic');
     toast("✨ KURU KURU MAGIC! ✨", {
       description: "Something magical just happened!",
+      duration: 5000,
     });
     // Add some temporary sparkle effect
     document.body.style.filter = 'hue-rotate(180deg)';
@@ -39,7 +41,7 @@ const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) =>
 
   const handleAction = (action: string, message: string, description: string) => {
     playSound?.('click');
-    toast(message, { description });
+    toast(message, { description, duration: 3000 });
   };
 
   return (

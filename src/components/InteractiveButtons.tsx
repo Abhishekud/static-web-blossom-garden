@@ -7,24 +7,6 @@ interface InteractiveButtonsProps {
 }
 
 const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) => {
-  const [mood, setMood] = useState('happy');
-  
-  const moods = [
-    { name: 'happy', emoji: '😊', color: 'from-yellow-400 to-orange-400' },
-    { name: 'excited', emoji: '🤩', color: 'from-pink-400 to-red-400' },
-    { name: 'peaceful', emoji: '😌', color: 'from-blue-400 to-cyan-400' },
-    { name: 'playful', emoji: '😜', color: 'from-purple-400 to-pink-400' },
-  ];
-
-  const handleMoodChange = (newMood: string) => {
-    setMood(newMood);
-    playSound?.('mood');
-    const selectedMood = moods.find(m => m.name === newMood);
-    toast(`Feeling ${newMood}! ${selectedMood?.emoji}`, {
-      description: "Kuru kuru is now in a " + newMood + " mood!",
-      duration: 3000  
-    });
-  };
 
   const handleSpecialAction = () => {
     playSound?.('magic');
@@ -38,27 +20,9 @@ const InteractiveButtons: React.FC<InteractiveButtonsProps> = ({ playSound }) =>
       document.body.style.filter = 'none';
     }, 1000);
   }; 
-  
-  return (
-    <div className="mt-12 space-y-6">
-      {/* Mood selector */}
-      <div className="text-center">
-        <p className="text-white mb-4 font-semibold">Choose Kuru's mood:</p>
-        <div className="flex flex-wrap justify-center gap-3">
-          {moods.map((moodOption) => (
-            <button
-              key={moodOption.name}
-              onClick={() => handleMoodChange(moodOption.name)}
-              className={`px-4 py-2 rounded-full text-white font-semibold transition-all transform hover:scale-105 ${
-                mood === moodOption.name ? 'ring-4 ring-white/50' : ''
-              } bg-gradient-to-r ${moodOption.color}`}
-            >
-              {moodOption.emoji} {moodOption.name}
-            </button>
-          ))}
-        </div>
-      </div>
 
+  return (
+    <div className="mt-12 space-y-6"> 
       {/* Special actions */}
       <div className="text-center space-y-3">
         <button

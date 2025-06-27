@@ -1,16 +1,15 @@
-
 import React from 'react';
 
 const FloatingElements = () => {
   const elements = [
-    { emoji: '🌸', delay: '0s', duration: '8s', size: 'text-2xl' },
-    { emoji: '🦋', delay: '1s', duration: '12s', size: 'text-3xl' },
-    { emoji: '🌺', delay: '2s', duration: '10s', size: 'text-xl' },
-    { emoji: '✨', delay: '3s', duration: '6s', size: 'text-lg' },
-    { emoji: '🎀', delay: '4s', duration: '14s', size: 'text-2xl' },
-    { emoji: '💝', delay: '5s', duration: '9s', size: 'text-xl' },
-    { emoji: '🌈', delay: '6s', duration: '11s', size: 'text-3xl' },
-    { emoji: '⭐', delay: '7s', duration: '7s', size: 'text-lg' },
+    { emoji: '🌸', delay: '0s', duration: '16s', size: 'text-2xl' }, // Doubled from 8s
+    { emoji: '🦋', delay: '1s', duration: '24s', size: 'text-3xl' }, // Doubled from 12s
+    { emoji: '🌺', delay: '2s', duration: '20s', size: 'text-xl' }, // Doubled from 10s
+    { emoji: '✨', delay: '3s', duration: '12s', size: 'text-lg' }, // Doubled from 6s
+    { emoji: '🎀', delay: '4s', duration: '28s', size: 'text-2xl' }, // Doubled from 14s
+    { emoji: '💝', delay: '5s', duration: '18s', size: 'text-xl' }, // Doubled from 9s
+    { emoji: '🌈', delay: '6s', duration: '22s', size: 'text-3xl' }, // Doubled from 11s
+    { emoji: '⭐', delay: '7s', duration: '14s', size: 'text-lg' }, // Doubled from 7s
   ];
 
   return (
@@ -29,7 +28,7 @@ const FloatingElements = () => {
           {element.emoji}
         </div>
       ))}
-      
+
       {/* Additional floating circles */}
       {[...Array(6)].map((_, i) => (
         <div
@@ -41,7 +40,7 @@ const FloatingElements = () => {
             left: `${Math.random() * 100}%`,
             top: `${Math.random() * 100}%`,
             animationDelay: `${i * 0.5}s`,
-            animationDuration: `${3 + Math.random() * 2}s`,
+            animationDuration: `${6 + Math.random() * 4}s`, // Increased from 3 + Math.random() * 2
           }}
         />
       ))}
